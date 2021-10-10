@@ -8,8 +8,8 @@ print('dimensions: ', room.dimensions)
 print('camera:     ', room.camera)
 print('lights:     ', room.lights)
 
-humans = [(3, 4), (-2, 8)]  # my fake GetHumanLocs()
-print('humans:     ', room.people)
+# humans = [(3, 4), (-2, 8)]  # my fake GetHumanLocs()
+# print('humans:     ', room.people)
 
 # set up the graph    
 """
@@ -27,7 +27,8 @@ for i in range(50):
     plt.cla()
 """
 
-human1 = [(-5, 0)]
-for i in range(1000):
+human1 = [(-5, 3)]
+for i in range(10000):
     room.RefreshRoom(human1, 1)
+    human1[0] = (human1[0][0] + 0.08, human1[0][1] + 0.04)
     

@@ -3,8 +3,12 @@ import numpy as np
 import math
 import cv2
 
-class perception:
+class Perception:
     def __init__(self):
+        """ctx = rs.context()
+        devices = ctx.query_devices()
+        for dev in devices:
+            dev.hardware_reset()"""
         #sets up depth/color data pipelines
         self.pipeline = rs.pipeline()
         self.config = rs.config()
@@ -18,6 +22,7 @@ class perception:
         self.hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
         self.profile = self.cfg.get_stream(rs.stream.color) 
         self.intrinsics = self.profile.as_video_stream_profile().get_intrinsics()
+        
     def __del__(self):
         self.pipeline.stop()
     def getHumans(self):
@@ -64,9 +69,9 @@ class perception:
         cv2.waitKey(1)
         
 # Code for testing
+"""
+percep = Perception()
 
-#percep = perception()
-#
-#while(True):
-#    percep.update()
-#    print(percep.getHumans())
+while(True):
+    percep.update()
+    print(percep.getHumans())"""

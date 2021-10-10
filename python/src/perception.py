@@ -63,9 +63,10 @@ class perception:
         cv2.imshow('RealSense', images)
         cv2.waitKey(1)
         
-      
-percep = perception()
+# Code for testing
 
-while(True):
-    percep.update()
-    print(percep.getHumans())
+#percep = perception()
+#
+#while(True):
+#    percep.update()
+#    print(percep.getHumans())

@@ -25,6 +25,9 @@ class RoomLayout:
 
     fig, ax = plt.subplots()
 
+    def dist(self, point1, point2):
+        return ((point2[0] - point1[0])**2 + (point2[1] - point1[1])**2)**0.5
+
     def __init__(self, FileName):
         with open(FileName, 'r') as input:
             reader = csv.reader(input, delimiter=' ')
@@ -47,9 +50,9 @@ class RoomLayout:
         ClosestLight = -1
         for light in self.lights:
             loc = (light[0], light[1])
-            if (ClosestLight == -1 or math.dist(loc, PersonLoc) < math.dist(ClosestLight, PersonLoc)):
+            if (ClosestLight == -1 or self.dist(loc, PersonLoc) < self.dist(ClosestLight, PersonLoc)):
                 ClosestLight = loc
-        return math.dist(ClosestLight, PersonLoc)
+        return self.dist(ClosestLight, PersonLoc)
 
 
     def RefreshLights(self, ExternalLightFctr):
@@ -59,7 +62,7 @@ class RoomLayout:
             MinDist = self.ClosestLightDist(person)
             if (MinDist < RoomLayout.MAX_HUMAN_RAD):
                 for i in range(len(self.lights)):
-                    CurDist = math.dist((self.lights[i][0], self.lights[i][1]), person)
+                    CurDist = self.dist((self.lights[i][0], self.lights[i][1]), person)
                     if CurDist <= RoomLayout.MAX_HUMAN_RAD:
                         ScaledVal = int((RoomLayout.MAX_HUMAN_RAD - CurDist) /
                                                 (RoomLayout.MAX_HUMAN_RAD - MinDist) * 100)
@@ -67,7 +70,7 @@ class RoomLayout:
                             self.lights[i][3] = ScaledVal
             else:
                 for i in range(len(self.lights)):
-                    CurDist = math.dist((self.lights[i][0], self.lights[i][1]), person)
+                    CurDist = self.dist((self.lights[i][0], self.lights[i][1]), person)
                     if CurDist == MinDist:
                         self.lights[i][3] = 100
         for light in self.lights:

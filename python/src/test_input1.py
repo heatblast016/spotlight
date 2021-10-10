@@ -27,9 +27,7 @@ for i in range(50):
     plt.cla()
 """
 
-human1 = [(-5, 3)]
-while True:
+human1 = [(-5, 0)]
+for i in range(1000):
     room.RefreshRoom(human1, 1)
-    human1 = [(human1[0][0] + 0.04, human1[0][1] + 0.02)]
-    # print(human1)
     
